@@ -56,6 +56,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#prompt_systematic_review.paperSource.PaperSource"><code class="docutils literal notranslate"><span class="pre">PaperSource</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prompt_systematic_review.utils.auto_pipeline"><code class="docutils literal notranslate"><span class="pre">auto_pipeline()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#prompt_systematic_review.utils.process_paper_title"><code class="docutils literal notranslate"><span class="pre">process_paper_title()</span></code></a></li>
 </ul>
 </li>
@@ -93,7 +94,7 @@
 <dd><p>A class to represent a source of papers from ArXiv.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="prompt_systematic_review.arxiv_source.ArXivSource.getPaperSrc">
-<span class="sig-name descname"><span class="pre">getPaperSrc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Paper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destinationFolder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recurse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prompt_systematic_review.arxiv_source.ArXivSource.getPaperSrc" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">getPaperSrc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Paper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destinationFolder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recurse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prompt_systematic_review.arxiv_source.ArXivSource.getPaperSrc" title="Permalink to this definition"></a></dt>
 <dd><p>download a paper.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -140,9 +141,26 @@
 <dd></dd></dl>
 
 <span class="target" id="module-prompt_systematic_review.utils"></span><dl class="py function">
+<dt class="sig sig-object py" id="prompt_systematic_review.utils.auto_pipeline">
+<span class="sig-prename descclassname"><span class="pre">prompt_systematic_review.utils.</span></span><span class="sig-name descname"><span class="pre">auto_pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csvFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folderPath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prompt_systematic_review.utils.auto_pipeline" title="Permalink to this definition"></a></dt>
+<dd><p>Uploads both a CSV and a folder to HuggingFace Hub.
+We do both because it doesnt make sense to upload pdfs
+without also uploding the master CSV</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>csvFile</strong> (<em>str</em>) – The path to the CSV file.</p></li>
+<li><p><strong>folderPath</strong> (<em>str</em>) – The path to the folder.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="prompt_systematic_review.utils.process_paper_title">
 <span class="sig-prename descclassname"><span class="pre">prompt_systematic_review.utils.</span></span><span class="sig-name descname"><span class="pre">process_paper_title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#prompt_systematic_review.utils.process_paper_title" title="Permalink to this definition"></a></dt>
-<dd><p>Process a paper title by converting it to lowercase and removing newline characters and extra spaces.</p>
+<dd><p>Process a paper title by converting it to lowercase, removing newline characters,
+replacing ‘-’ with ‘’, collapsing any amount of spaces in a row to a single space.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>title</strong> (<em>str</em>) – The original title of the paper.</p>
